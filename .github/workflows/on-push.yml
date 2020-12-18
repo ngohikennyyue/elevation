@@ -16,8 +16,6 @@ jobs:
             python: 3.8
           - os: ubuntu
             python: 3.8
-          - os: ubuntu
-            python: 3.8
             extras: -minimal
           - os: windows
             python: 3.8
@@ -85,7 +83,7 @@ jobs:
     - name: Check code style with isort
       run: |
         $CONDA/bin/conda install isort
-        $CONDA/bin/isort .
+        $CONDA/bin/isort --check .
 
   distribution:
     runs-on: ubuntu-latest
