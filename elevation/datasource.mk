@@ -25,7 +25,7 @@ spool/%$(TILE_EXT): spool/%$(COMPRESSED_PRE_EXT).gz
 
 cache/%.tif: spool/%$(TILE_EXT)
 	@mkdir -p $(dir $@)
-	gdal_translate -q -co TILED=YES -co COMPRESS=DEFLATE -co ZLEVEL=9 -co PREDICTOR=2 $< $@ $(STDERR_SWITCH) || touch $@
+	gdal_translate -q -co TILED=YES -co COMPRESS=DEFLATE -co ZLEVEL=50 -co PREDICTOR=2 $< $@ $(STDERR_SWITCH) || touch $@
 
 download: $(ENSURE_TILE_PATHS)
 
@@ -33,7 +33,7 @@ copy_vrt:
 	cp $(PRODUCT).vrt $(PRODUCT).$(RUN_ID).vrt
 
 clip: $(PRODUCT).vrt
-	gdal_translate -q -co TILED=YES -co COMPRESS=DEFLATE -co ZLEVEL=9 -co PREDICTOR=2 -projwin $(PROJWIN) $(PRODUCT).$(RUN_ID).vrt $(OUTPUT)
+	gdal_translate -q -co TILED=YES -co COMPRESS=DEFLATE -co ZLEVEL=50 -co PREDICTOR=2 -projwin $(PROJWIN) $(PRODUCT).$(RUN_ID).vrt $(OUTPUT)
 	$(RM) $(PRODUCT).$(RUN_ID).vrt
 
 info:
